@@ -60,12 +60,32 @@ public class Village {
 	}
 	
 	public String installerVendeur(Gaulois vendeur, String produit, int nbProduit) {
-		System.out.println(vendeur.getNom() + " cherche un endroit pour vendre " + nbProduit + " " + produit + ".");
+		StringBuilder chaine = new StringBuilder();
+		chaine.append(vendeur.getNom() + " cherche un endroit pour vendre " + nbProduit + " " + produit + ".");
+		
 		Etal etal = new Etal();
 		etal.occuperEtal(vendeur, produit, nbProduit);
 		int indiceEtalLibre = marche.trouverEtalLibre();
 		marche.utiliserEtal(indiceEtalLibre, vendeur, produit, nbProduit);
-		return "Le vendeur " + vendeur.getNom() + " vend des fleurs à l'étal n°" + (indiceEtalLibre+1) + ".";
+		
+		chaine.append("\nLe vendeur " + vendeur.getNom() + " vend des " + produit + " à l'étal n°" + (indiceEtalLibre+1) + ".");
+		return chaine.toString();
+	}
+	
+	public String rechercherVendeursProduit(String produit) {
+		StringBuilder chaine = new StringBuilder();
+		
+		Etal[] etalProduit = marche.trouverEtals(produit);
+		if (etalProduit.length == 0) {
+			chaine.append("Il n'y a pas de vendeur qui propose des fleurs au marché.");
+		} else if (etalProduit.length == 1) {
+			
+		}
+		for (int i=0; i < etalProduit.length; i++) {
+			etalProduit[i].getVendeur().getNom();
+		}
+		
+		return chaine.toString();
 	}
 	
 	
