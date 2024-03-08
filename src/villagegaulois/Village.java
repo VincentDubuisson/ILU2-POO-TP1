@@ -46,6 +46,11 @@ public class Village {
 
 	public String afficherVillageois() {
 		StringBuilder chaine = new StringBuilder();
+		
+		if (chef == null) {
+			throw new VillageSansChefException("le village doit avoir un chef");
+		}
+		
 		if (nbVillageois < 1) {
 			chaine.append("Il n'y a encore aucun habitant au village du chef "
 					+ chef.getNom() + ".\n");
@@ -191,6 +196,24 @@ public class Village {
 				chaine.append("Il reste " + nbEtalVide + " étals non utilisés dans le marché.\n");
 			}
 			return chaine.toString();
+		}
+	}
+	
+	public class VillageSansChefException extends RuntimeException {
+		
+		public VillageSansChefException() {
+		}
+		
+		public VillageSansChefException(String message) {
+			super(message);
+		}
+		
+		public VillageSansChefException(Throwable cause) {
+			super(cause);
+		}
+		
+		public VillageSansChefException(String message, Throwable cause) {
+			super(message, cause);
 		}
 	}
 }
